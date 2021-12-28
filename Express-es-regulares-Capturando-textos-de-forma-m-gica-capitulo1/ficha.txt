@@ -1,0 +1,106 @@
+Regex, ou expressões regulares, é uma linguagem para diversos tipos de procuras em textos,
+alguns exemplos são:
+
+    A) Extraindo seções específicas de um arquivo de texto
+    B) Validação de formatação de, por exemplo, e-mail ou telefone
+    C) Análise de arquivos de texto e extração de dados para, por exemplo, gravar no banco de dados
+    D) Substituindo os valores de um texto para limpar, reformatar ou alterar o conteúdo
+
+Uma classe de caracteres predefinida é \d, que significa qualquer dígito.
+
+meta char =  são caracteres que podem assumir diferentes valores quando interpretados.
+
+Exemplos:  .(ponto) ou * (asteristico) 
+
+Com \ podemos escapar meta-chars, por exemplo \..
+
+quantifiers = quantificam quantas vezes um caractere aparece, 
+
+*(zero ou mais vezes) é um quantifier que significa zero, uma ou mais vezes
+Exemplos: {3}(trez vezes algo)
+
++(uma ou mais vezes)
+
+?(zero ou uma vez) define que o caractere é opcional no caso abaixo o ponto deixa de ser obrigatorio
+Exemplos: \d{1,3}\.?\d{1,3}\.?\d{1,3}\.?\d{1,3}
+
+[] usado para definir que determinado caractere pode ser um ou outro tipo utilizando uma classe
+de caracteres.
+Exemplos: \d{1,3}\[.-]\d{1,3}\[.-]\d{1,3}\[.-]\d{1,3} ( o separador pode ser ponto ou hifen)
+
+Os parênteses são meta-chars e precisam ser utilizados para capturar o valor literal
+Exemplos: \(\d{2}\) \d{4}-\d{4} retorna um numero de celular com ddd entre parênteses e espaço a seguir
+
+s+ quando se que capturar algo com um espaço ou mais
+Exemplos: [1-3]?\d\s+ (retorna um primeiro numero opcional mais um segundo numero e os espaços seguintes)
+
+[a-z] cobre todos as letras do alfabeto, porém não abrange caracteres especiais. Para adicionalos,
+use uma expressão como [A-ZÇ] que retorna letras mais o ç.
+
+\w+ significa word char e é uma atalho para [A-Za-z0-9_]
+
+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} está expressão retorna um numero variavel que no cado do ip
+pode ter entre 1 e 3 digitos apos o ponto.
+
+\d{5}\-\d{3} expressão que encontra um CEP contendo 5 digitos 1 hifen e 3 numeros aleatórios
+após o hifen
+
+para encontrar as tags <code> e </code> na sentença abaixo o regex usado é: </?code>
+No <code>for</code>, o valor de <code>i</code> começa de zero e é incrementado a cada volta enquanto <code>i < 10</code>, portando o bloco de código do for é executado 10 vezes.
+
+Para garantir que o nosso usuário preencha um horário que siga esse padrão: 19h32min16s.
+\d{2}h\d{2}min\d{2}s
+Tem uma regex parecida nas respostas, no entanto ela usa uma \ na frente
+de cada classes de digitos:
+\[0-9]{2}h\[0-9]{2}min\[0-9]{2}s
+Sem essa barra a regex também funcionaria:
+[0-9]{2}h[0-9]{2}min[0-9]{2}s
+
+Como seria a expressão regular que devemos usar para validarmos a placa de um carro?
+Exemplo de placa: KMG-8089
+[A-Z]{3}-\d{4}
+
+separando do arquivo CSV os nomes e as notas dos alunos que tiraram de 7.2 a 7.9
+9.8 - Robson, 7.1 - Teresa, 4.5 - Armênio, 6.5 - Zulu, 7.7 - Stefania, 7.8 - João, 5.0 - Romeu, 7.2 - Pompilho, 3.1 - Reinaldo, 7.3 - Bernadete, 4.7 - Cinério 
+7.[2-9]\s+-\s+[A-Z][a-zã]+
+queremos pegar qualquer quantidade de caracteres que estejam antes da vírgula, por isso usaremos [^,]+
+que pega qualquer dígito que não seja uma vírgula, seja ele letra ou número
+
+BALEIRO GARROTE SERROTE GOLEIRO ROTEIRO 
+Escreva uma expressão regular que faça match apenas com as palavras GARROTE, SERROTE e ROTEIRO.
+[GSR][A-Z]{6} (retorna uma exp a mais)
+[A-Z]*ROT[A-Z]+
+
+Apenas os caracteres \ (barra invertida), - (hífen) e ^ (circunflexo) realmente são meta-chars
+dentro de uma classe.
+O circunflexo (^) significa negação dentro dos colchetes
+
+O username precisa ser da seguinte forma:
+
+    O limite é de 10 caracteres;
+    O primeiro caractere deve ser uma letra do alfabeto, não pode ser um número;
+    A partir do segundo caractere podemos ter letras maiúsculas, minúsculas e números;
+                OU
+    @Pattern(regexp="[a-zA-Z]\w{1,9}")
+
+
+Ancoras
+
+Word boundary
+
+O que queremos na verdade é encontrar o início e o fim de uma palavra, que podemos
+definir pela regex \b. \b é uma das âncoras, chamada de word boundary. Uma âncora não seleciona
+um caractere, ela seleciona apenas uma posição no texto alvo.
+
+Non-word-boundary: \B
+
+Alvo: português proporcional compor
+
+Pattern: \Bpor\B
+
+A nossa regex seleciona a sílaba por, e antes e depois dela, deve ter um Non word boundary.
+Em outras palavras, a silaba por deve aparecer dentro de uma palavra, nunca no inicio ou fim.
+
+^ Aponta caracteres que devem estar no inicio da sentença
+
+$ aponta expressoes que devem estar no final de uma sentença
