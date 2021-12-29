@@ -46,7 +46,8 @@ pode ter entre 1 e 3 digitos apos o ponto.
 após o hifen
 
 para encontrar as tags <code> e </code> na sentença abaixo o regex usado é: </?code>
-No <code>for</code>, o valor de <code>i</code> começa de zero e é incrementado a cada volta enquanto <code>i < 10</code>, portando o bloco de código do for é executado 10 vezes.
+No <code>for</code>, o valor de <code>i</code> começa de zero e é incrementado a cada volta
+enquanto <code>i < 10</code>, portando o bloco de código do for é executado 10 vezes.
 
 Para garantir que o nosso usuário preencha um horário que siga esse padrão: 19h32min16s.
 \d{2}h\d{2}min\d{2}s
@@ -104,3 +105,38 @@ Em outras palavras, a silaba por deve aparecer dentro de uma palavra, nunca no i
 ^ Aponta caracteres que devem estar no inicio da sentença
 
 $ aponta expressoes que devem estar no final de uma sentença
+
+Non capturing group: (?:)
+O grupo marcado por esta expressão não sera exibido
+
+Para separar sentenças:
+sentença: Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+(Caused[\s+\w:.]+):([\w\s+]+)
+\w:. define que o ponto deve ser considerado um caractere comum.
+: após o parenteses indica até onde a seleção do primeiro grupo deve ir
+
+Selecionando um email valido
+
+expressão: ([a-z.]{4,14}[a-z\d])@(?:caelum.com.br|alura.com.br)
+target: super.mario4@caelum.com.br µhjl.lçj
+Repare que o segundo grupo usa o pipe: | para selecionar email 
+que terminam com caelum.com.br OU alura.com.br. Além disso, o grupo não é capturado (?:)
+Requisitos:
+O email deve ter um @ e terminar com caelum.com.br ou alura.com.br. O nome do usuário (tudo antes do @) 
+tem apenas letras minúsculas, pode ter um número no final e tem de 5 a 15 caracteres.
+
+Referenciando grupos:
+expressão: /\1 (referencia o primeiro grupo)
+expressão: /\2 (referencia o segundo grupo)
+
+<h1[^>]+> seleciona tudo dentro da tag que não seja o > e apos, quando encontra o > termina a query
+\W é um atalho para [^\w]
+\D é um atalho para [^\d]
+
+Existem uma serie de ferramentas sofisticadas na web que você pode utilizar para escrever e analisar a sua regex. Essas ferramentas vão além do nosso "testador" e dão mais dicas sobre a regex criadas.
+
+Seguem dois links interessantes:
+
+    regexr.com
+    regex101.com/
